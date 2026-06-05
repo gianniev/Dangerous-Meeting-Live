@@ -12,7 +12,7 @@ export default async function HomePage() {
     <main>
       <Hero
         imageSrc="https://www.izotope.com/storage-cms/images/_aliases/hero_fallback_1x/0/0/2/5/365200-1-eng-GB/fbb8b7d55c99-How-to-mix-a-live-recording.jpg"
-        videoSrc="/hero/DimmuBorgirDemo.mp4"
+        youtubeVideoId="C6e-vcWgmbI"
         title={dictionary.home.hero.title}
         subtitle={dictionary.home.hero.subtitle}
       />

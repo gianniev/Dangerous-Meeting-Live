@@ -179,16 +179,34 @@ main {
 }
 
 .hero-image,
-.hero-video {
+.hero-video,
+.hero-youtube {
   display: block;
   height: 62vh;
-  object-fit: cover;
   width: 100%;
+}
+
+.hero-image,
+.hero-video {
+  object-fit: cover;
 }
 
 .hero-video {
   inset: 0;
   position: absolute;
+}
+
+.hero-youtube {
+  border: 0;
+  height: 56.25vw;
+  left: 50%;
+  min-height: 100%;
+  min-width: 177.78vh;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
 }
 
 .hero::after {
@@ -922,7 +940,8 @@ p {
   }
 
   .hero,
-  .hero-image {
+  .hero-image,
+  .hero-youtube {
     height: 54vh;
     min-height: 420px;
   }
