@@ -1,0 +1,87 @@
+{
+  "site": {
+    "description": "Grabacion multicamara, streaming y produccion audiovisual para actuaciones en vivo."
+  },
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "mainLabel": "Navegacion principal",
+    "openMenu": "Abrir menu",
+    "homeLabel": "Dangerous Meeting inicio"
+  },
+  "home": {
+    "hero": {
+      "title": "Live Recording",
+      "subtitle": "Capture the essence of your performance"
+    },
+    "intro": {
+      "title": "Live Record Any Performance",
+      "paragraphs": [
+        "Dangerous Meeting es un proyecto donde conviven la creacion y la produccion audiovisual para capturar actuaciones en vivo con una mirada directa, potente y cuidada.",
+        "El servicio combina grabacion multicamara, realizacion de directos, streaming y produccion de audio para que cada concierto conserve la energia real del escenario.",
+        "Trabajamos con equipos preparados para salas, estudios y eventos, cuidando tanto la imagen como el sonido final para entregar piezas listas para compartir."
+      ]
+    }
+  },
+  "gallery": {
+    "title": "Our Work in Pictures",
+    "subtitle": "A closer look at live sessions, stage coverage, and production moments."
+  },
+  "videos": {
+    "title": "Live Recording Examples",
+    "subtitle": "Real examples of live recording, mixing and production projects.",
+    "serviceLine": "Live Recording • Mixing • Audio Production",
+    "recordedOn": "Recorded on",
+    "projects": [
+      {
+        "band": "Lóstregos",
+        "date": "06/02/2025"
+      },
+      {
+        "band": "Sadistic Christ",
+        "date": "26/01/2025"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "intro": "Para mas informacion contacta con:",
+    "social": "Tambien puedes seguirnos en Instagram y YouTube.",
+    "socialLabel": "Redes sociales",
+    "phoneAlt": "Telefono",
+    "modal": {
+      "ariaLabel": "Telefono de contacto",
+      "title": "Contacto directo",
+      "subtitle": "Dangerous Meetings",
+      "call": "Llamar",
+      "close": "Cerrar"
+    }
+  },
+  "services": {
+    "title": "Servicios",
+    "description": "Grabamos y producimos actuaciones en vivo con soluciones de video, audio y streaming adaptadas a cada evento.",
+    "items": [
+      "Grabacion en vivo",
+      "Realizacion multicamara",
+      "Streaming en vivo",
+      "Grabacion de audio",
+      "Edicion de video",
+      "Edicion de audio",
+      "Diseno de audio",
+      "Diseno de video"
+    ]
+  },
+  "about": {
+    "title": "Nosotros",
+    "paragraphs": [
+      "Somos un equipo dedicado a la grabacion de eventos en vivo, con experiencia en produccion audiovisual, sonido y realizacion multicamara.",
+      "Nuestro objetivo es capturar cada actuacion con calidad tecnica y respeto por la energia del directo.",
+      "Cubrimos desde conciertos y sesiones en sala hasta piezas preparadas para canales sociales, YouTube y material promocional."
+    ]
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}

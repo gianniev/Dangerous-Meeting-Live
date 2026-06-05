@@ -1,0 +1,87 @@
+{
+  "site": {
+    "description": "Multicamera recording, streaming, and audiovisual production for live performances."
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "mainLabel": "Main navigation",
+    "openMenu": "Open menu",
+    "homeLabel": "Dangerous Meeting home"
+  },
+  "home": {
+    "hero": {
+      "title": "Live Recording",
+      "subtitle": "Capture the essence of your performance"
+    },
+    "intro": {
+      "title": "Live Record Any Performance",
+      "paragraphs": [
+        "Dangerous Meeting brings together audiovisual production and creative direction to capture live performances with a direct, powerful, and carefully crafted approach.",
+        "The service combines multicamera recording, live direction, streaming, and audio production so every concert keeps the real energy of the stage.",
+        "We work with setups prepared for venues, studios, and events, taking care of both image and final sound to deliver pieces ready to share."
+      ]
+    }
+  },
+  "gallery": {
+    "title": "Our Work in Pictures",
+    "subtitle": "A closer look at live sessions, stage coverage, and production moments."
+  },
+  "videos": {
+    "title": "Live Recording Examples",
+    "subtitle": "Real examples of live recording, mixing and production projects.",
+    "serviceLine": "Live Recording • Mixing • Audio Production",
+    "recordedOn": "Recorded on",
+    "projects": [
+      {
+        "band": "Lóstregos",
+        "date": "06/02/2025"
+      },
+      {
+        "band": "Sadistic Christ",
+        "date": "26/01/2025"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "For more information, contact:",
+    "social": "You can also follow us on Instagram and YouTube.",
+    "socialLabel": "Social media",
+    "phoneAlt": "Phone",
+    "modal": {
+      "ariaLabel": "Contact phone",
+      "title": "Direct contact",
+      "subtitle": "Dangerous Meetings",
+      "call": "Call",
+      "close": "Close"
+    }
+  },
+  "services": {
+    "title": "Services",
+    "description": "We record and produce live performances with video, audio, and streaming solutions adapted to each event.",
+    "items": [
+      "Live recording",
+      "Multicamera direction",
+      "Live streaming",
+      "Audio recording",
+      "Video editing",
+      "Audio editing",
+      "Audio design",
+      "Video design"
+    ]
+  },
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "We are a team dedicated to recording live events, with experience in audiovisual production, sound, and multicamera direction.",
+      "Our goal is to capture every performance with technical quality and respect for the energy of the live show.",
+      "We cover everything from concerts and venue sessions to pieces prepared for social channels, YouTube, and promotional material."
+    ]
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
