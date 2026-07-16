@@ -6,7 +6,7 @@ export const site = {
   emails: ["juan@dangerousmeetings.com", "angel@dangerousmeetings.com"],
   phone: "+34 617 55 76 13",
   phoneHref: "tel:+34617557613",
-  logoSrc: "/icons/Logo transparente largo.png"
+  logoSrc: "/icons/Logotransparentelargo.png"
 };
 
 export const navItems: NavItem[] = [

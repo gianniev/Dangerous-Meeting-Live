@@ -1,5 +1,5 @@
 :root {
-  --background: #111010;
+  --background: #000000;
   --background-soft: #181616;
   --panel: #242121;
   --text: #ffffff;
@@ -77,26 +77,39 @@ a {
 
 .site-header {
   align-items: center;
-  background-color: var(--background);
-  border-bottom: 1px solid var(--line);
+  background: transparent;
+  border-bottom: 1px solid transparent;
   display: flex;
   gap: 24px;
+  min-height: 64px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   justify-content: space-between;
-  min-height: 86px;
-  padding: 10px clamp(16px, 5vw, 56px);
+  padding: 0 clamp(16px, 5vw, 56px);
   position: sticky;
   top: 0;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
   z-index: 100;
+}
+
+.site-header.scrolled {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .logo {
   display: inline-flex;
   line-height: 0;
+  margin: 0;
+  padding: 0;
   text-decoration: none;
 }
 
 .logo-img {
   height: auto;
+  margin-top: 6px;
   max-width: min(250px, 58vw);
   transition: transform 0.3s ease;
   width: 250px;
@@ -119,8 +132,9 @@ a {
   border-radius: 5px;
   color: var(--muted);
   display: inline-flex;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0.4px;
   padding: 8px 10px;
   position: relative;
   text-decoration: none;
@@ -171,7 +185,39 @@ main {
   margin: 0 auto;
 }
 
+.splash-screen {
+  align-items: center;
+  background: radial-gradient(circle at center, #161616 0%, #050505 62%, #000000 100%);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  pointer-events: auto;
+  position: fixed;
+  z-index: 5000;
+}
+
+.splash-screen-logo {
+  height: auto;
+  max-width: min(520px, 78vw);
+  width: 100%;
+  will-change: opacity, transform;
+}
+
+.splash-screen-entering .splash-screen-logo {
+  animation: splashLogoEnter 0.55s ease-out both;
+}
+
+.splash-screen-leaving {
+  animation: splashScreenExit 0.35s ease-in forwards;
+  pointer-events: none;
+}
+
+.splash-screen-leaving .splash-screen-logo {
+  animation: splashLogoExit 0.35s ease-in forwards;
+}
+
 .hero {
+  margin-top: 10px;
   min-height: 62vh;
   overflow: hidden;
   position: relative;
@@ -699,6 +745,45 @@ p {
   }
 }
 
+@keyframes splashLogoEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes splashLogoExit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes splashScreenExit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-screen-entering .splash-screen-logo,
+  .splash-screen-leaving,
+  .splash-screen-leaving .splash-screen-logo {
+    animation-duration: 0.12s;
+  }
+}
+
 .popup-backdrop {
   position: fixed;
   inset: 0;
@@ -886,27 +971,52 @@ p {
 
 @media (max-width: 768px) {
   .site-header {
-    min-height: 74px;
-    padding: 8px 14px;
+    height: 64px;
+    padding: 0 14px;
   }
 
   .logo-img {
-    width: 170px;
+    height: 56px;
+    width: auto;
   }
 
   .burger-menu {
-    display: block;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
+    width: 44px;
     z-index: 110;
+  }
+
+  .burger-menu .bar {
+    background: #ffffff;
+    border-radius: 2px;
+    height: 2px;
+    margin: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 22px;
   }
 
   .nav-menu {
     align-items: center;
     background-color: rgba(17, 16, 16, 0.97);
     display: none;
+    height: 100vh;
     inset: 0;
     justify-content: center;
+    left: 0;
     position: fixed;
+    top: 0;
+    width: 100vw;
     z-index: 105;
   }
 
@@ -916,27 +1026,32 @@ p {
 
   .nav-menu ul {
     flex-direction: column;
-    gap: 18px;
+    gap: 8px;
+    width: 100%;
   }
 
   .nav-menu a {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    min-width: 180px;
     justify-content: center;
-    padding: 12px 18px;
+    padding: 14px 0;
+    text-align: center;
+    width: 100%;
   }
 
+  .burger-menu.open .bar:nth-child(2),
   .burger-menu.active .bar:nth-child(2) {
     opacity: 0;
   }
 
+  .burger-menu.open .bar:nth-child(1),
   .burger-menu.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
   }
 
+  .burger-menu.open .bar:nth-child(3),
   .burger-menu.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .hero,
