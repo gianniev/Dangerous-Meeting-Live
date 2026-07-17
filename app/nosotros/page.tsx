@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { dictionary } = await getDictionary();
+  const { dictionary, locale } = await getDictionary();
 
-  return {
-    title: dictionary.about.title
-  };
+  return buildPageMetadata({
+    title: dictionary.about.title,
+    description: dictionary.about.paragraphs[0],
+    locale,
+    path: "/nosotros"
+  });
 }
 
 export default async function NosotrosPage() {

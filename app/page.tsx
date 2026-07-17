@@ -22,7 +22,7 @@ export default async function HomePage() {
 
         <section className="content-section">
           <div className="section-text">
-            <h1>{dictionary.home.intro.title}</h1>
+            <h2>{dictionary.home.intro.title}</h2>
             {dictionary.home.intro.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}

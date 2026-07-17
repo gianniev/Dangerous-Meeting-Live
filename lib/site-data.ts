@@ -2,8 +2,21 @@ import type { GalleryImage, NavItem, ServiceItem, SocialLink, VideoItem } from "
 
 export const site = {
   name: "Dangerous Meeting",
+  url: "https://www.dangerousmeeting.com",
   description: "Grabacion multicamara, streaming y produccion audiovisual para actuaciones en vivo.",
   emails: ["juan@dangerousmeetings.com", "angel@dangerousmeetings.com"],
+  keywords: [
+    "Dangerous Meeting",
+    "live recording",
+    "grabacion en vivo",
+    "multicamera recording",
+    "realizacion multicamara",
+    "streaming en vivo",
+    "produccion audiovisual",
+    "live music video",
+    "concert recording"
+  ],
+  ogImage: "/images/The%20Laws%20RRSS.jpg",
   phone: "+34 617 55 76 13",
   phoneHref: "tel:+34617557613",
   logoSrc: "/icons/Logotransparentelargo.png"
@@ -94,10 +107,10 @@ export const galleryImages: GalleryImage[] = [
 export const videos: VideoItem[] = [
   {
     title: "Lostregos - 06/02/2025",
-    youtubeEmbedUrl: "https://www.youtube.com/embed/55qj9p3h8BI"
+    youtubeEmbedUrl: "https://www.youtube-nocookie.com/embed/55qj9p3h8BI"
   },
   {
     title: "Sadistic Christ - 26/01/2025",
-    youtubeEmbedUrl: "https://www.youtube.com/embed/oohUqM-tZBQ"
+    youtubeEmbedUrl: "https://www.youtube-nocookie.com/embed/oohUqM-tZBQ"
   }
 ];

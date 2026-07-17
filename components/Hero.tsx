@@ -10,7 +10,7 @@ type HeroProps = {
 
 export function Hero({ imageSrc, videoSrc, youtubeVideoId, title, subtitle }: HeroProps) {
   const youtubeEmbedUrl = youtubeVideoId
-    ? `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&modestbranding=1&playsinline=1`
+    ? `https://www.youtube-nocookie.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&modestbranding=1&playsinline=1`
     : null;
 
   return (

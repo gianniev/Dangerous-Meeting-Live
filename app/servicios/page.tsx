@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import { ServiceList } from "@/components/ServiceList";
 import { getDictionary, getLocalizedServices } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { dictionary } = await getDictionary();
+  const { dictionary, locale } = await getDictionary();
 
-  return {
-    title: dictionary.services.title
-  };
+  return buildPageMetadata({
+    title: dictionary.services.title,
+    description: dictionary.services.description,
+    locale,
+    path: "/servicios"
+  });
 }
 
 export default async function ServiciosPage() {

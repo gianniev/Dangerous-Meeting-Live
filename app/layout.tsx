@@ -3,6 +3,7 @@ import { Inter, Montserrat } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getDictionary, getLocalizedNavItems } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site-data";
 import "./globals.css";
 
@@ -21,14 +22,14 @@ const montserrat = Montserrat({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { dictionary } = await getDictionary();
+  const { dictionary, locale } = await getDictionary();
 
   return {
-    title: {
-      default: site.name,
-      template: `%s | ${site.name}`
-    },
-    description: dictionary.site.description,
+    metadataBase: new URL(site.url),
+    ...buildPageMetadata({
+      description: dictionary.site.description,
+      locale
+    }),
     icons: {
       icon: "/icons/head.png"
     }

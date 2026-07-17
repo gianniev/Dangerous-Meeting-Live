@@ -39,6 +39,7 @@ export function VideoSection({ title, texts, videos }: VideoSectionProps) {
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  loading="lazy"
                 />
               </div>
               <div className="video-card-content">

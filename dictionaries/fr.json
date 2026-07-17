@@ -1,0 +1,87 @@
+{
+  "site": {
+    "description": "Captation multicamera, streaming et production audiovisuelle pour performances live."
+  },
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "about": "A propos",
+    "contact": "Contact",
+    "mainLabel": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "homeLabel": "Accueil Dangerous Meeting"
+  },
+  "home": {
+    "hero": {
+      "title": "Live Recording",
+      "subtitle": "Capturez l'essence de votre performance"
+    },
+    "intro": {
+      "title": "Enregistrez n'importe quelle performance live",
+      "paragraphs": [
+        "Dangerous Meeting reunit production audiovisuelle et direction creative pour capturer les performances live avec une approche directe, puissante et soignee.",
+        "Le service combine captation multicamera, realisation live, streaming et production audio afin que chaque concert conserve l'energie reelle de la scene.",
+        "Nous travaillons avec des configurations adaptees aux salles, studios et evenements, en soignant autant l'image que le son final pour livrer des contenus prets a partager."
+      ]
+    }
+  },
+  "gallery": {
+    "title": "Notre travail en images",
+    "subtitle": "Un apercu des sessions live, de la couverture scene et des moments de production."
+  },
+  "videos": {
+    "title": "Exemples de captation live",
+    "subtitle": "Exemples reels de projets de captation, mixage et production live.",
+    "serviceLine": "Captation live - Mixage - Production audio",
+    "recordedOn": "Enregistre le",
+    "projects": [
+      {
+        "band": "Lostregos",
+        "date": "06/02/2025"
+      },
+      {
+        "band": "Sadistic Christ",
+        "date": "26/01/2025"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Pour plus d'informations, contactez :",
+    "social": "Vous pouvez aussi nous suivre sur Instagram et YouTube.",
+    "socialLabel": "Reseaux sociaux",
+    "phoneAlt": "Telephone",
+    "modal": {
+      "ariaLabel": "Telephone de contact",
+      "title": "Contact direct",
+      "subtitle": "Dangerous Meetings",
+      "call": "Appeler",
+      "close": "Fermer"
+    }
+  },
+  "services": {
+    "title": "Services",
+    "description": "Nous enregistrons et produisons des performances live avec des solutions video, audio et streaming adaptees a chaque evenement.",
+    "items": [
+      "Captation live",
+      "Realisation multicamera",
+      "Streaming live",
+      "Enregistrement audio",
+      "Montage video",
+      "Montage audio",
+      "Design audio",
+      "Design video"
+    ]
+  },
+  "about": {
+    "title": "A propos",
+    "paragraphs": [
+      "Nous sommes une equipe dediee a la captation d'evenements live, avec de l'experience en production audiovisuelle, son et realisation multicamera.",
+      "Notre objectif est de capturer chaque performance avec qualite technique et respect de l'energie du live.",
+      "Nous couvrons aussi bien des concerts et sessions en salle que des contenus prepares pour les reseaux sociaux, YouTube et le materiel promotionnel."
+    ]
+  },
+  "footer": {
+    "rights": "Tous droits reserves."
+  }
+}

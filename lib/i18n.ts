@@ -1,14 +1,16 @@
 import { headers } from "next/headers";
 import en from "@/dictionaries/en.json";
 import es from "@/dictionaries/es.json";
+import fr from "@/dictionaries/fr.json";
 import type { NavItem, ServiceItem } from "@/lib/types";
 
-export type Locale = "es" | "en";
+export type Locale = "es" | "en" | "fr";
 export type Dictionary = typeof es;
 
 const dictionaries = {
   es,
-  en
+  en,
+  fr
 } satisfies Record<Locale, Dictionary>;
 
 export function detectLocale(acceptLanguage: string | null): Locale {
@@ -20,10 +22,16 @@ export function detectLocale(acceptLanguage: string | null): Locale {
     .split(",")
     .map((language) => language.trim().toLowerCase().split(";")[0]);
 
-  const matchingLanguage = languages.find((language) => language.startsWith("es") || language.startsWith("en"));
+  const matchingLanguage = languages.find(
+    (language) => language.startsWith("es") || language.startsWith("en") || language.startsWith("fr")
+  );
 
   if (matchingLanguage?.startsWith("en")) {
     return "en";
+  }
+
+  if (matchingLanguage?.startsWith("fr")) {
+    return "fr";
   }
 
   return "es";
