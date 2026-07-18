@@ -27,7 +27,12 @@
   },
   "gallery": {
     "title": "Notre travail en images",
-    "subtitle": "Un apercu des sessions live, de la couverture scene et des moments de production."
+    "subtitle": "Un apercu des sessions live, de la couverture scene et des moments de production.",
+    "label": "Galerie",
+    "dialogLabel": "Apercu agrandi de la galerie",
+    "close": "Fermer la galerie",
+    "previous": "Image precedente",
+    "next": "Image suivante"
   },
   "videos": {
     "title": "Exemples de captation live",

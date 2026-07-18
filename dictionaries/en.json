@@ -27,7 +27,12 @@
   },
   "gallery": {
     "title": "Our Work in Pictures",
-    "subtitle": "A closer look at live sessions, stage coverage, and production moments."
+    "subtitle": "A closer look at live sessions, stage coverage, and production moments.",
+    "label": "Gallery",
+    "dialogLabel": "Gallery image preview",
+    "close": "Close gallery",
+    "previous": "Previous image",
+    "next": "Next image"
   },
   "videos": {
     "title": "Live Recording Examples",

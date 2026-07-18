@@ -1,26 +1,51 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent, PointerEvent as ReactPointerEvent } from "react";
 import type { GalleryImage } from "@/lib/types";
 
 type GalleryProps = {
   images: GalleryImage[];
+  labels: {
+    close: string;
+    dialog: string;
+    label: string;
+    next: string;
+    previous: string;
+  };
   subtitle: string;
   title: string;
 };
 
-export function Gallery({ images, subtitle, title }: GalleryProps) {
+export function Gallery({ images, labels, subtitle, title }: GalleryProps) {
   const featuredImages = images.slice(0, 8);
   const [mainImage, ...secondaryImages] = featuredImages;
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
   const activeImage = activeImageIndex === null ? null : featuredImages[activeImageIndex];
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const openerRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
+  const wasLightboxOpenRef = useRef(false);
 
-  const closeLightbox = useCallback(() => {
-    setActiveImageIndex(null);
+  const openLightbox = useCallback((index: number) => {
+    setActiveImageIndex(index);
   }, []);
 
-  const showPreviousImage = useCallback(() => {
+  const closeLightbox = useCallback(() => {
+    setActiveImageIndex((currentIndex) => {
+      if (currentIndex !== null) {
+        requestAnimationFrame(() => {
+          openerRefs.current[currentIndex]?.focus();
+        });
+      }
+
+      return null;
+    });
+  }, []);
+
+  const showPrevious = useCallback(() => {
     setActiveImageIndex((currentIndex) => {
       if (currentIndex === null) {
         return currentIndex;
@@ -30,7 +55,7 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
     });
   }, [featuredImages.length]);
 
-  const showNextImage = useCallback(() => {
+  const showNext = useCallback(() => {
     setActiveImageIndex((currentIndex) => {
       if (currentIndex === null) {
         return currentIndex;
@@ -39,6 +64,72 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
       return currentIndex === featuredImages.length - 1 ? 0 : currentIndex + 1;
     });
   }, [featuredImages.length]);
+
+  const handlePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse") {
+      return;
+    }
+
+    pointerStartRef.current = {
+      x: event.clientX,
+      y: event.clientY
+    };
+  }, []);
+
+  const handlePointerEnd = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const startPoint = pointerStartRef.current;
+
+      if (!startPoint) {
+        return;
+      }
+
+      pointerStartRef.current = null;
+
+      const deltaX = event.clientX - startPoint.x;
+      const deltaY = event.clientY - startPoint.y;
+
+      if (Math.abs(deltaX) < 56 || Math.abs(deltaX) < Math.abs(deltaY)) {
+        return;
+      }
+
+      if (deltaX < 0) {
+        showNext();
+        return;
+      }
+
+      showPrevious();
+    },
+    [showNext, showPrevious]
+  );
+
+  const handleLightboxKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusableElements = dialogRef.current?.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    if (!focusableElements?.length) {
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (activeImageIndex === null) {
@@ -55,6 +146,18 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
 
   useEffect(() => {
     if (activeImageIndex === null) {
+      wasLightboxOpenRef.current = false;
+      return;
+    }
+
+    if (!wasLightboxOpenRef.current) {
+      closeButtonRef.current?.focus();
+      wasLightboxOpenRef.current = true;
+    }
+  }, [activeImageIndex]);
+
+  useEffect(() => {
+    if (activeImageIndex === null) {
       return;
     }
 
@@ -64,11 +167,11 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
       }
 
       if (event.key === "ArrowLeft") {
-        showPreviousImage();
+        showPrevious();
       }
 
       if (event.key === "ArrowRight") {
-        showNextImage();
+        showNext();
       }
     }
 
@@ -77,11 +180,14 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activeImageIndex, closeLightbox, showNextImage, showPreviousImage]);
+  }, [activeImageIndex, closeLightbox, showNext, showPrevious]);
 
   if (!mainImage) {
     return null;
   }
+
+  const activeCounter =
+    activeImageIndex === null ? "" : `${String(activeImageIndex + 1).padStart(2, "0")} / ${String(featuredImages.length).padStart(2, "0")}`;
 
   return (
     <section className="gallery">
@@ -90,61 +196,89 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
         <p className="gallery-subtitle">{subtitle}</p>
       </div>
       <div className="gallery-grid">
-        <GalleryCard image={mainImage} index={0} isFeatured onOpen={setActiveImageIndex} />
+        <GalleryCard
+          ariaLabel={`${labels.dialog}: ${mainImage.title}`}
+          buttonRef={(node) => {
+            openerRefs.current[0] = node;
+          }}
+          image={mainImage}
+          index={0}
+          isFeatured
+          onOpen={openLightbox}
+        />
         {secondaryImages.map((image, index) => (
-          <GalleryCard image={image} index={index + 1} key={image.src} onOpen={setActiveImageIndex} />
+          <GalleryCard
+            ariaLabel={`${labels.dialog}: ${image.title}`}
+            buttonRef={(node) => {
+              openerRefs.current[index + 1] = node;
+            }}
+            image={image}
+            index={index + 1}
+            key={image.src}
+            onOpen={openLightbox}
+          />
         ))}
       </div>
       {activeImage ? (
         <div
-          aria-label={`${activeImage.title} image preview`}
+          aria-label={labels.dialog}
           aria-modal="true"
           className="lightbox"
           onClick={closeLightbox}
+          onKeyDown={handleLightboxKeyDown}
+          ref={dialogRef}
           role="dialog"
+          tabIndex={-1}
         >
-          <button
-            aria-label="Close image preview"
-            className="lightbox-close"
-            onClick={(event) => {
-              event.stopPropagation();
-              closeLightbox();
-            }}
-            type="button"
-          >
-            X
-          </button>
-          <button
-            aria-label="Show previous image"
-            className="lightbox-control lightbox-control-prev"
-            onClick={(event) => {
-              event.stopPropagation();
-              showPreviousImage();
-            }}
-            type="button"
-          >
-            &lt;
-          </button>
-          <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
-            <div className="lightbox-image-wrap">
-              <Image src={activeImage.src} alt={activeImage.alt} fill sizes="(max-width: 768px) 92vw, 82vw" />
+          <div className="lightbox-shell" onClick={(event) => event.stopPropagation()}>
+            <button
+              aria-label={labels.close}
+              className="lightbox-close"
+              onClick={closeLightbox}
+              ref={closeButtonRef}
+              type="button"
+            >
+              <span aria-hidden="true">X</span>
+            </button>
+            <div
+              className="lightbox-image-area"
+              onPointerCancel={() => {
+                pointerStartRef.current = null;
+              }}
+              onPointerDown={handlePointerDown}
+              onPointerUp={handlePointerEnd}
+            >
+              <button
+                aria-label={labels.previous}
+                className="lightbox-control lightbox-control-prev"
+                onClick={showPrevious}
+                type="button"
+              >
+                <span aria-hidden="true">&lt;</span>
+              </button>
+              <div className="lightbox-image-wrap">
+                <Image
+                  alt={activeImage.alt}
+                  fill
+                  key={activeImage.src}
+                  priority
+                  sizes="(max-width: 768px) 100vw, 70vw"
+                  src={activeImage.src}
+                />
+              </div>
+              <button aria-label={labels.next} className="lightbox-control lightbox-control-next" onClick={showNext} type="button">
+                <span aria-hidden="true">&gt;</span>
+              </button>
             </div>
-            <div className="lightbox-caption">
-              <span>{activeImage.subtitle}</span>
+            <aside className="lightbox-info">
+              <div className="lightbox-meta">
+                <span className="lightbox-kicker">{labels.label}</span>
+                <span className="lightbox-count">{activeCounter}</span>
+              </div>
               <h3>{activeImage.title}</h3>
-            </div>
+              <p>{activeImage.subtitle}</p>
+            </aside>
           </div>
-          <button
-            aria-label="Show next image"
-            className="lightbox-control lightbox-control-next"
-            onClick={(event) => {
-              event.stopPropagation();
-              showNextImage();
-            }}
-            type="button"
-          >
-            &gt;
-          </button>
         </div>
       ) : null}
     </section>
@@ -152,11 +286,15 @@ export function Gallery({ images, subtitle, title }: GalleryProps) {
 }
 
 function GalleryCard({
+  ariaLabel,
+  buttonRef,
   image,
   index,
   isFeatured = false,
   onOpen
 }: {
+  ariaLabel: string;
+  buttonRef: (node: HTMLButtonElement | null) => void;
   image: GalleryImage;
   index: number;
   isFeatured?: boolean;
@@ -164,9 +302,10 @@ function GalleryCard({
 }) {
   return (
     <button
-      aria-label={`Open ${image.title} image`}
+      aria-label={ariaLabel}
       className={isFeatured ? "gallery-card gallery-card-featured" : "gallery-card"}
       onClick={() => onOpen(index)}
+      ref={buttonRef}
       type="button"
     >
       <Image

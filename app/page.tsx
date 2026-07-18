@@ -29,7 +29,18 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <Gallery images={galleryImages} title={dictionary.gallery.title} subtitle={dictionary.gallery.subtitle} />
+        <Gallery
+          images={galleryImages}
+          labels={{
+            close: dictionary.gallery.close,
+            dialog: dictionary.gallery.dialogLabel,
+            label: dictionary.gallery.label,
+            next: dictionary.gallery.next,
+            previous: dictionary.gallery.previous
+          }}
+          title={dictionary.gallery.title}
+          subtitle={dictionary.gallery.subtitle}
+        />
         <VideoSection videos={videos} title={dictionary.videos.title} texts={dictionary.videos} />
         <ContactSection title={dictionary.contact.title} texts={dictionary.contact} />
       </main>

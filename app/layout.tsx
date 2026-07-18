@@ -31,7 +31,13 @@ export async function generateMetadata(): Promise<Metadata> {
       locale
     }),
     icons: {
-      icon: "/icons/head.png"
+      icon: [
+        { url: "/favicon.ico", sizes: "48x48" },
+        { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+        { url: "/icons/head.png", type: "image/png", sizes: "512x512" }
+      ],
+      shortcut: "/favicon.ico",
+      apple: [{ url: "/icons/head.png", type: "image/png", sizes: "512x512" }]
     }
   };
 }
